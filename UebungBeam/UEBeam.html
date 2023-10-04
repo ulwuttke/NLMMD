@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>FEM Übungsbeispiel linear/nichtlinear &#8212; NLMMD Übungen</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'UebungBeam/UEBeam';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FEM Übungsbeispiel 2: Einelementmodell" href="../UebungEinElement/UEEinElement.html" />
+    <link rel="prev" title="Übersicht" href="../Einleitung.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Einleitung.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Einleitung.html">
+                    Übersicht
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">FEM Übungsbeispiel linear/nichtlinear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UebungEinElement/UEEinElement.html">FEM Übungsbeispiel 2: Einelementmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quellen.html">Quellenverzeichnis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUebungBeam/UEBeam.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/UebungBeam/UEBeam.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>FEM Übungsbeispiel linear/nichtlinear</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vorabbemerkungen">Vorabbemerkungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-der-berechnung">Start der Berechnung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-und-ihhalt-der-fem-datei">Struktur und Ihhalt der .fem Datei</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lineare-berechnung">Lineare Berechnung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nichtlineare-berechnung-berechnung">Nichtlineare Berechnung Berechnung</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fem-ubungsbeispiel-linear-nichtlinear">
+<h1>FEM Übungsbeispiel linear/nichtlinear<a class="headerlink" href="#fem-ubungsbeispiel-linear-nichtlinear" title="Permalink to this heading">#</a></h1>
+<section id="vorabbemerkungen">
+<h2>Vorabbemerkungen<a class="headerlink" href="#vorabbemerkungen" title="Permalink to this heading">#</a></h2>
+<p>Übungsbeispiel für das FEM-Programm (solver) OptiStruct <span id="id1">[<a class="reference internal" href="../markdown.html#id3" title="Altair Engineering Inc. Altair optistruct. Version 2021.2.1.0.1.">AltairEIncb</a>]</span></p>
+<ul class="simple">
+<li><p>zum Kennenlernen der Dateistruktur</p></li>
+<li><p>zum Einstieg in die Befehlszeilen</p></li>
+<li><p>als Beispiel von linearen und nichtlinearen Rechnungen</p></li>
+</ul>
+<!---Eine gute Stichworthilfe erhält man über den [Altair OptiStruct Reference Guide](https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/ref_guide_os_c.htm)--->
+<p>Für die Bearbeitung der Textdateien empfiehlt sich ein ordentlicher Texteditor wie z.B. <a class="reference external" href="https://notepad-plus-plus.org/">notepad++</a></p>
+<p>Die im Folgenden verwendeten .fem-Dateien stehen über die <a class="reference external" href="https://campuas.frankfurt-university.de/course/view.php?id=1796">CampUas-Seite</a> zur verfügung.</p>
+<p>Das betrachtete Berechnungsbeispiel ist ein simpeler Kragträger aus einem fiktiven Material der mit einer Einzelkraft belastet ist.</p>
+<p><img alt="Kragarm" src="../_images/Kragarm.png" /></p>
+<p>Nach der linearen Biegetheorie ergibt sich für den Kragträger eine deutlich zu große Verformung:</p>
+<p><span class="math notranslate nohighlight">\(I=\pi d^4/64 = \pi\cdot 20^{4}/64 \text{mm}^{4}=7854\text{mm}^{4}\)</span></p>
+<p><span class="math notranslate nohighlight">\(w=\frac{1}{3} \frac{F\cdot l^{3}}{EI}=\frac{1}{3} \frac{F\cdot 1000^{3}}{100000\cdot 490,9} \text{mm}=424\text{mm}\)</span></p>
+</section>
+<section id="start-der-berechnung">
+<h2>Start der Berechnung<a class="headerlink" href="#start-der-berechnung" title="Permalink to this heading">#</a></h2>
+<p>Das Starten der Berehcnung kann auf zwei Arten erfolgen:</p>
+<ul class="simple">
+<li><p>über die Kommandozeild der Eingabeaufforderung (command shell), z.B. zum Starten der Berechnung mit der Datei <em>230912_BeamLin.fem</em> in Windows (der Pfad ist natürlich ggf. anzupassen, (vgl. <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/run_optistruct_intro_r.htm">run OptiStruct <em>from a skript</em></a>). Die Erzeugt <em>.h3d</em>-Datei kann dann über Hyperview geöffnet werden.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="s2">&quot;Program Files&quot;</span>\<span class="n">Altair</span>\<span class="mf">2021.2</span>\<span class="n">hwsolvers</span>\<span class="n">scripts</span>\<span class="n">optistruct</span> <span class="mi">230912</span><span class="n">_BeamLin</span><span class="o">.</span><span class="n">fem</span>
+
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>über Hyperworks und den Import via <em>Solver Deck</em> und anschließenden Start der Berechnung über <em>Analysis -&gt; OptiSttruct</em></p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Altair Hyperworks 2021.2: Einlesen .fem Datei<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><img alt="IportSolverDeck" src="../_images/Opti2021_ImpSolDeck.jpg" /></p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Altair Hyperworks 2021.2: Start der Berechnung und Anzeigen der Ergebnisse<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><img alt="StartOptiStruct" src="../_images/Opti2021_BerStart.jpg" /></p>
+</div>
+</details></section>
+<section id="struktur-und-ihhalt-der-fem-datei">
+<h2>Struktur und Ihhalt der .fem Datei<a class="headerlink" href="#struktur-und-ihhalt-der-fem-datei" title="Permalink to this heading">#</a></h2>
+<p>Natülich lassen sich alle Berechnugnseinstellungen auch über die Menüstruktur von Hyperworks <span id="id2">[<a class="reference internal" href="../markdown.html#id4" title="Altair Engineering Inc. Altair hyperworks. Version 2021.2.">AltairEInca</a>]</span> bzw. Hypermesh eingeben. Da die Menüfühung aber wie bei jedem Programm nicht so ganz eingängig ist, im Rahmen des Kurses das Grundmodell vorgegeben ist und letztlich nur das Material angepasst werden muss, ist es (hoffentlich) einfacher, direkt in der Textdatei zu arbeiten (der grundsätzliche Aufbau der Eingabedatei ist <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/data_input_file_r.htm">hier</a> beschrieben). Die <em>$</em>-Zeichen sind er Datei sind Kommentarsymbole, d.h. diese Zeile wird nicht eingelesen und ist eine reine Kommentarzeile.</p>
+<p>Zunächst geht es um eine einfache lineare Rechnung am Beispiel der Datei <span class="xref myst">230912_BeamLin.fem</span>.</p>
+<p>Der erste wichtige Block in der <em>Subcase Information</em> bzw. <em>i/O-Section</em> ist der <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/analysis_sub_r.htm"><em>ANALYSIS</em>-Eintrag</a> mit der nachfolgenden Zuordnung der Randbedingungen und Lasten:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$ ========== Static (lin. Geom) ========
+ANALYSIS STATCS
+  SPC = 1001
+  LOAD = 1002
+</pre></div>
+</div>
+<p><em>ANALYSIS STATICS</em> definiert eine eine linear statische Berechnung. Das bedeutet es können nur lineare Materialien verwendet werden und auch die Verformung wird linearisiert (entspricht der klassischen linearen Biegetheorie).
+Die Zahl hinter <em>SPC</em> (=<em>Single Point Constraint</em>) ist die ID der Lagerungsbedinung, die in der Rechnung berücksichtigt werden soll und verweist somit auf den weiter unten in der <em>Bulk Data Section</em> stehenden <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/spc_bulk_r.htm">SPC-Eintrag</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$========= RB  ============= 
+$$ 
+SPC,1001,101,123456,0.0
+SPC,1001,201,123456,0.0
+</pre></div>
+</div>
+<p>Die Zahlenfolge <em>123456</em> beschreibt dabei die Freiheitsgrade des Knotens, die mit der Randbedingung festgehalten werden. In diesem Beispiel werden alle Verscuiebungen(<em>123</em>) und auch alle Verdrehnungen (<em>456</em>) festgehalten.</p>
+<p>Die Zahl hinter <em>LOAD</em> ist entsprechend die ID des zu berechnenden Lastfalls. Also den auch in der <em>Bulk Data Section</em> stehenden <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/force_bulk_r.htm">FORCE-EIntrag</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$==========Belastung=======================
+$$
+FORCE,1002,102,0,1.e+3,0.0,-1.,0.0
+FORCE,1002,206,0,1.e+3,0.0,-1.,0.0 
+</pre></div>
+</div>
+<p>Die Bedeutung der einzelnen Einträge hinter sind in im <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/ref_guide_os_c.htm"><em>Altair OptiStruct Referenc Guide</em></a> beschrieben (als Beispiel sind oben <em>SPC</em> und <em>FORCE</em> direkt verlinkt).</p>
+<p>Die Geometrie ergibt sich aus den Elementen (hier Balkenlemente vom Typ <em>CBAR</em>) die über die Knoten (<em>GRID</em>) verknüpft werden:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$ Balken aus einem Element
+GRID,101,0,0.0,0.0,0.0
+GRID,102,0,1000.,0.,0.
+CBAR,1,22,101,102,0.,1.,1.,GGG
+$$
+$$ Balken aus mehreren Elementen
+GRID,201,0,0.0,250.,0.0
+GRID,202,0,200.,250.,0.0
+[...]
+</pre></div>
+</div>
+<p>Wie zu erkennen wird nicht nur ein Balken, sondern zwei erzeugt: einmal aus nur einem Element und ein weiteres mal aus mehreren Elementen. Daher waren auch die oben genannten Lasten und Lagerungsbedingunen immer dopelt angegeben. Warum hier so vorgeganen wurde wird bei der Auswertung der Berechnung erläutert. In dem oberen Eintrag werden zwei Knoten mit der ID<em>101</em> bzw. ID<em>102</em> an den Positonen (0;0;0) und (0;0;1000.) erzeugt und mit einem Balken der ein Balken verbnuden. Der Balken bekommt seine Eigenschaften über die <em>Property Definition</em> mit der ID<em>22</em>, hier über den Eintrag <em>PBARL</em> (Rundstab mit R=10):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$================ Eigenschaften ==================
+$$ 
+PBARL, 22, 33,,ROD
+,10.
+$$
+</pre></div>
+</div>
+<p>Das Material wird hier über die ID<em>33</em> der <em>PBARL</em>-Definition zugewiesen. Definiert wird es durch den <em>MAT1</em>-Eintrag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$================= Materialien ============= 
+MAT1,33,100000.,,0.3,
+$$
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alle Zahlenwerte sind ohne Einheit angeggeben. Die Einheiten sind natürlcih zu beachten. Bei rein statischen Rechnungen ohhne Eigengewicht ist die Sache recht einfach: Alle Werte sind in <em>mm</em> und <em>N</em> einzugeben, dann ergeben sich die Verformungen auch in <em>mm</em> und die Spannungen in <em>MPa</em></p>
+</div>
+</section>
+<section id="lineare-berechnung">
+<h2>Lineare Berechnung<a class="headerlink" href="#lineare-berechnung" title="Permalink to this heading">#</a></h2>
+<p>Nach dem Abschluss der Berechnung der Datei <em>230912_BeamLin.fem</em> kann die erzeugte .h3d-Datei in Hyperview geöffnet werden und es sollte sich das folgende Bild ergeben:</p>
+<p><img alt="Icons" src="../_images/HyView2021Beam02.jpg" /></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Tipps zur Darstellung<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><img alt="Icons" src="../_images/HyView2021Beam01.jpg" />
+1: Ausrichten in der x-y-Ebene
+2: Skalieren der Verformung (<em>Scale Factor</em> = 1,0) und Darstellen der undeformierten Struktur (<em>Udeformed Shape -&gt; Edges</em>)
+3: Darstellung der Verformung als Farbplot (<em>Contur</em>, <em>Result Type -&gt; Deformatoin, Mag</em>)</p>
+</div>
+</details><p>Hier ist nun auch der Grund für die “zwei Balken” zu erkennen. Beide Balken verformen sich gleich und zwar um einen Betrag von <span class="math notranslate nohighlight">\(4.42E+2-&gt;442\text{mm}\)</span> in y-Richtung (zu erkennen, wenn nur die x bzw. y-Komponente der Verformung dargestellt wird). Das entspricht (zum Glpück) der klassichen Handrechnung. Man erkenn aber, dass das Programm die Verformung zwar richtig rechnet, aber bei nur einem Element die Knoten einfach falsch linear verbindet. Erst bei mehreren Balken werden an jedem Konten auch Zwischenwerte berechnet und damit kann die Balkenverformung besser abgebildet werden.</p>
+<p>Aufgrund der linearen Rechnung (insb. der linearisierten Geometie) ist aber trotz der großen Verformung in y-Richtung die Verformung in x-Richtung gleich Null. Das kann so natürlich nicht sein, da der Balken dann ja länger werden müsste.</p>
+</section>
+<section id="nichtlineare-berechnung-berechnung">
+<h2>Nichtlineare Berechnung Berechnung<a class="headerlink" href="#nichtlineare-berechnung-berechnung" title="Permalink to this heading">#</a></h2>
+<p>Als ersten Schritt zur Nichtlinearen Rechnung ist die Berechnugnsdatei wie folgt angepasst (<em>230912_BeamNLin.fem</em>):</p>
+<p>Im <em>ANALYSIS</em> wird die Option <em>NLSTAT</em> gewählt. Zusätzlich werden die Optionen <em>NLPARAM</em> und <em>NLOUT</em> gesetzt. Über <em>NLOUT</em> wird zudem vorgegeben dass Zwischenwerte mit ausgegeben werden (Ansonsten würde ggf. nur das letzte Ergebnis ausgespielt und damit stünden keine Informationen über den Kraft-Weg-Verlauf bei steigender Kraft zur Verfügung).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ANALYSIS NLSTAT
+  SPC = 1001
+  LOAD = 1002
+  NLPARM = 1003
+  NLOUT = 1004
+[...]
+BEGIN BULK
+[...]
+$$
+NLPARM,1003,100
+NLOUT,1004,TIME,10044
+SET,10044,TIME,LIST
++,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8
++,0.9,1.0 
+</pre></div>
+</div>
+<p>Das neue Ergenis ist allerdings ernüchternd.</p>
+<p><img alt="Icons" src="../_images/HyView2021Beam03.jpg" /></p>
+<p>Da nun für Mehrere Zeitschritte Ergebnisse vorliegen, muss man bei der Darstellung ein paar Dinge beachten:</p>
+<p><strong>(1)</strong> wählt den Lastfaktor (Rechenzeit) aus. Wenn Hier <span class="math notranslate nohighlight">\(0,0\)</span> steht, ist der Balken noch unbelastet
+Bei <strong>(2)</strong> sollte <em>Transient Annimation Mode</em> ausgewählt sein. Dann kann man mit dem Schieberegler <strong>(3)</strong> die Last steigern.
+Über <strong>(4)</strong> lässt sich das Diagramm erzeugen.</p>
+<p>Es sit zu erkennen, dass nun zwar iterativ aber aufgrund der weiterhin linearisierten Geometrie im Grunde die Rechnung nicht verbessert wird. immernoch linear gerechnet wird. Erst durch die Ergänzung <em>LGDISP</em>,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">NLPARM</span><span class="p">(</span><span class="n">LGDISP</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1003</span>
+</pre></div>
+</div>
+<p>wird nun auch die Verformung “richtig” berechnet. Über die Eingabedatei <em>230912_BeamNLinLaDisp.fem</em> ergibt sich das folgende Ergebnis:</p>
+<p><img alt="Icons" src="../_images/HyView2021Beam04.jpg" /></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+… hier das ordentliche Diagramm<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><img alt="Ergebnisdiagramm" src="../_images/ErgNLLaDisp.png" /></p>
+</div>
+</details><p>Das Folgende ist hier hervorzuheben:</p>
+<ul class="simple">
+<li><p>bis zu Belastung von <span class="math notranslate nohighlight">\(F=100\text{N}\)</span> (<em>TIME=0.1</em> entspricht dem Lastfaktor von <span class="math notranslate nohighlight">\(0,1\)</span>) ist der Verluaf der Verformung mit Zunahme der Last annähernd linear; die Verformung in x-Richtung ist näherungsweise Null,</p></li>
+<li><p>danach verformt sich die Spitze des Kragarms auch in x-Richtung (<span class="math notranslate nohighlight">\(u\)</span>).</p></li>
+<li><p>die Art der Vernetztung hat einen deutlichen Einfluss: bei dem Balken aus mehreren Elementen ist ein deutlich nichtlinearer Verlauf der Verformung in y-Richtung (<span class="math notranslate nohighlight">\(w\)</span>) zu erkennen.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./UebungBeam"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Einleitung.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Übersicht</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../UebungEinElement/UEEinElement.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">FEM Übungsbeispiel 2: Einelementmodell</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vorabbemerkungen">Vorabbemerkungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-der-berechnung">Start der Berechnung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-und-ihhalt-der-fem-datei">Struktur und Ihhalt der .fem Datei</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lineare-berechnung">Lineare Berechnung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nichtlineare-berechnung-berechnung">Nichtlineare Berechnung Berechnung</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By U. Wuttke
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

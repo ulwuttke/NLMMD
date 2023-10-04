@@ -1,0 +1,648 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>FEM Übungsbeispiel 2: Einelementmodell &#8212; NLMMD Übungen</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'UebungEinElement/UEEinElement';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Quellenverzeichnis" href="../Quellen.html" />
+    <link rel="prev" title="FEM Übungsbeispiel linear/nichtlinear" href="../UebungBeam/UEBeam.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Einleitung.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Einleitung.html">
+                    Übersicht
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../UebungBeam/UEBeam.html">FEM Übungsbeispiel linear/nichtlinear</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">FEM Übungsbeispiel 2: Einelementmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quellen.html">Quellenverzeichnis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUebungEinElement/UEEinElement.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/UebungEinElement/UEEinElement.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>FEM Übungsbeispiel 2: Einelementmodell</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vorabbemerkungen">Vorabbemerkungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neue-features-im-vergl-zum-ubungsbeispiel-1">Neue <em>Features</em> im Vergl. zum Übungsbeispiel 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mehrere-lastfalle">Mehrere Lastfälle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verformung-als-belastung">Verformung als Belastung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materialmodelle">Materialmodelle</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berechnung-ergebnis-und-auswertung">Berechnung, Ergebnis und Auswertung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastisch-plastische-rechnung">elastisch-plastische Rechnung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperelastische-rechnung">hyperelastische Rechnung</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fem-ubungsbeispiel-2-einelementmodell">
+<h1>FEM Übungsbeispiel 2: Einelementmodell<a class="headerlink" href="#fem-ubungsbeispiel-2-einelementmodell" title="Permalink to this heading">#</a></h1>
+<section id="vorabbemerkungen">
+<h2>Vorabbemerkungen<a class="headerlink" href="#vorabbemerkungen" title="Permalink to this heading">#</a></h2>
+<p>Übungsbeispiel für das FEM-Programm (solver) OptiStruct <span id="id1">[<a class="reference internal" href="../markdown.html#id3" title="Altair Engineering Inc. Altair optistruct. Version 2021.2.1.0.1.">AltairEIncb</a>]</span></p>
+<ul class="simple">
+<li><p>zum Ausprobieren unterschiedlicher Materialmodelle</p></li>
+<li><p>zum Kennenlernen der Wegregelung und des Einsatzes mehrerer Rechenschritte
+Das beispiel baut auf dem <a class="reference internal" href="../UebungBeam/UEBeam.html"><span class="doc std std-doc">Übungsbeispiel 1</span></a> auf</p></li>
+</ul>
+<p>Die im Folgenden verwendeten .fem-Dateien <em>230919_EinHexa.fem</em> stehen über die <a class="reference external" href="https://campuas.frankfurt-university.de/course/view.php?id=1796">CampUas-Seite</a> zur verfügung.</p>
+<p>Das verwendete FE-Modell ist ein Würfel mit der Kantenlänge <span class="math notranslate nohighlight">\(a=50\text{mm}\)</span>, der nur durch ein 8-Knoten-Hexaederelement vom Typ <em>CHEXA</em> abgebildet wird.</p>
+<p><img alt="Einelementmodell3D" src="../_images/EinElement.png" /></p>
+</section>
+<section id="neue-features-im-vergl-zum-ubungsbeispiel-1">
+<h2>Neue <em>Features</em> im Vergl. zum Übungsbeispiel 1<a class="headerlink" href="#neue-features-im-vergl-zum-ubungsbeispiel-1" title="Permalink to this heading">#</a></h2>
+<section id="mehrere-lastfalle">
+<h3>Mehrere Lastfälle<a class="headerlink" href="#mehrere-lastfalle" title="Permalink to this heading">#</a></h3>
+<p>Über das Schlüsselwort <em>SUBCASE</em> können mehrere Lastfälle definiert werden. Durch die Angabe <em>CNTNLSUB=YES</em> rechnet der aktuelle Lastfall auf Basis der Ergebnisse des vorherigen weiter (Ansonsten startet die Rechnung “von vorne”. In diesem Beispiel wird also zuerst die Load mit der <em>ID 21</em> aufgebracht und danach (da keine neue <em>LOAD</em> definiert wird) wieder zum Ausgangszustand zurückgerechnet (also entlastet). Die <em>ID 21</em> ist hier der Last vom Typ <em>SPCD</em> zugewiesen.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SUBCASE       1
+  LABEL Belastung
+$$ ========== Nonlinear Static ========
+ANALYSIS NLSTAT
+  SPC = 2
+  NLPARM(LGDISP) = 1
+  NLOUT = 1
+  LOAD = 21
+[...]
+$$ ======================================  
+$$
+SUBCASE       2
+  LABEL Entlastung
+$$ ========== Nonlinear Static ========
+ANALYSIS NLSTAT
+  CNTNLSUB=YES
+  SPC = 2
+  NLPARM(LGDISP) = 1
+  NLOUT = 1
+[...]
+</pre></div>
+</div>
+</section>
+<section id="verformung-als-belastung">
+<h3>Verformung als Belastung<a class="headerlink" href="#verformung-als-belastung" title="Permalink to this heading">#</a></h3>
+<p>Bei nichtlinearem Modellverhalten, also hier bei dem nichtlinearen Materialverhalten, ist es für den Rechner einfacher Verformungslastfälle zu rechnen, als auf der Basis von Kräften zu rechnen. Dies erfolgt durch das Schlüsselwort <em>SPCD</em>, mit dem eine Knotenverformung am Knoten mit der <em>ID 99999</em> vorgegeben werden kann. Gleichzeitig sind in <em>OptiStruct</em> für diesen Knoten mindestens die Richtnugen zu Lagern, in denen die Verformung aufgebracht wird (hier werden über <em>SPC</em> alle Freiheitsgrage festgehalten).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$  SPC Data
+$$ Verschiebungsrandbedinung:
+SPCD,21,99999,2,30.
+$$ Lagerung:
+SPC,2,99999,123456,0.0
+$$
+</pre></div>
+</div>
+</section>
+<section id="materialmodelle">
+<h3>Materialmodelle<a class="headerlink" href="#materialmodelle" title="Permalink to this heading">#</a></h3>
+<p>Ein elastisch-plastisches Materialverhalten wird über</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MAT1</span><span class="p">,</span><span class="mi">331</span><span class="p">,</span><span class="mf">200000.</span><span class="p">,,</span><span class="mf">0.3</span><span class="p">,</span>
+<span class="n">MATS1</span><span class="p">,</span><span class="mi">331</span><span class="p">,,</span><span class="n">PLASTIC</span><span class="p">,</span><span class="mf">10.0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">500</span>
+</pre></div>
+</div>
+<p>in dem Modell implementiert. Hyperelastisches Materialverhalten über</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MATHE</span><span class="p">,</span><span class="mi">332</span><span class="p">,</span><span class="n">MOONEY</span><span class="p">,,</span>
+<span class="p">,</span><span class="mf">80.</span><span class="p">,</span><span class="mf">20.</span><span class="p">,</span><span class="mf">0.001</span>
+</pre></div>
+</div>
+<p>Was dort im Detail vorgegeben wird, gilt es über den <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/ref_guide_os_c.htm">Altair OptiStruct Reference Guide</a> herauszufinden.</p>
+</section>
+</section>
+<section id="berechnung-ergebnis-und-auswertung">
+<h2>Berechnung, Ergebnis und Auswertung<a class="headerlink" href="#berechnung-ergebnis-und-auswertung" title="Permalink to this heading">#</a></h2>
+<p>Für die Berechnung ist die Eingabedatei <em>230919_EinHexa.fem</em> noch ein wenig zu editieren:</p>
+<section id="elastisch-plastische-rechnung">
+<h3>elastisch-plastische Rechnung<a class="headerlink" href="#elastisch-plastische-rechnung" title="Permalink to this heading">#</a></h3>
+<p>Durch die Angabe des Materials hier mit der <em>ID 331</em> bei den Voluenelementeigenschaften (<em>PSOLID</em>) wird dem Element das elastisch-plastische Material zugewiesen.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PSOLID</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">331</span>
+<span class="n">PSOLIDX</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Bei dem elastisch-plastischen Materialverhalten stehen die metallsichen Werkstoffe Pate. Die Verformung wird daher auf 10% der Probengröße eingestellt (d Umformtechnik sieht das mit Sicherheit anders), also hier $0,1\cdot 50\text{mm}=5\text{mm}.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SPCD</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">99999</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">5.</span>
+</pre></div>
+</div>
+<p>Damit ergibt sich mit etwas Glück das folgende Ergebnis (Kurvendarsttellung in zwei <em>Windows</em>, zusammengesetzt aus je einer Linie pro “SUBCASE” für die Verformung (<em>Displacement</em>) und die Lagerreaktion (<em>SPCForce</em>) in y-Richtung.</p>
+<p><img alt="Ergebnis el.-pl." src="../_images/HyViewEinElErgElPl.jpg" /></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+… hier das ordentliche Diagramm<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><img alt="Ergebnisdiagramm" src="../_images/elpl-F-u-Diagramm.PNG" /></p>
+</div>
+</details><p>Zur Interpretation des Kraft Verformungsverhaltens sind die folgenden Kurven zum Vergleich sinnvoll:</p>
+<ul class="simple">
+<li><p>technischer Spannugs- und Dehnungsverlauf, berechnet aus dem Kraft-Verformungs-Verlauf</p></li>
+<li><p>Spannungs-Dehungs-Verlauf als Ergebnis der Berechnung mit OptiStruct</p></li>
+<li><p>wahrer Spannugns-Dehnungs-Verlauf, berechnet aus dem Kraft-Verformungs-Verlauf</p></li>
+<li><p>Spannugns-Dehnugns-Verlauf aus den vorgegebenen Werkstoffkennwerten</p></li>
+</ul>
+</section>
+<section id="hyperelastische-rechnung">
+<h3>hyperelastische Rechnung<a class="headerlink" href="#hyperelastische-rechnung" title="Permalink to this heading">#</a></h3>
+<p>Durch die Angabe des Materials hier mit der <em>ID 332</em> bei den Voluenelementeigenschaften (<em>PSOLID</em>) wird dem Element das elastisch-plastische Material zugewiesen.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PSOLID</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">332</span>
+<span class="n">PSOLIDX</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Da das hyperelastische Materialverhalten für große Verzerrungen gedacht ist, ist das Beispiel für eine Dehnung von <span class="math notranslate nohighlight">\(200%\)</span> zu rechnen.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SPCD</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">99999</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">100.</span>
+</pre></div>
+</div>
+<p>Damit ergibt sich mit etwas Glück das folgende Ergebnis (Kurvendarsttellung in zwei <em>Windows</em>, zusammengesetzt aus je einer Linie pro “SUBCASE” für die Verformung (<em>Displacement</em>) und die Lagerreaktion (<em>SPCForce</em>) in y-Richtung.</p>
+<p><img alt="Ergebnis hy.-el." src="../_images/HyViewEinElErgHyEl.jpg" /></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+… hier das ordentliche Diagramm<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><img alt="Ergebnisdiagramm" src="../_images/hyel-F-u-Diagramm.PNG" /></p>
+</div>
+</details><p>Zur Interpretation des Kraft Verformungsverhaltens sind die folgenden Kurven zum Vergleich sinnvoll:</p>
+<ul class="simple">
+<li><p>technischer Spannugs- und Dehnungsverlauf, berechnet aus dem Kraft-Verformungs-Verlauf</p></li>
+<li><p>Spannungs-Dehungs-Verlauf als Ergebnis der Berechnung mit OptiStruct</p></li>
+<li><p>wahrer Spannugns-Dehnungs-Verlauf, berechnet aus dem Kraft-Verformungs-Verlauf</p></li>
+<li><p>Spannugns-Dehnugns-Verlauf aus den vorgegebenen Werkstoffkennwerten</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./UebungEinElement"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../UebungBeam/UEBeam.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">FEM Übungsbeispiel linear/nichtlinear</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Quellen.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Quellenverzeichnis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vorabbemerkungen">Vorabbemerkungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neue-features-im-vergl-zum-ubungsbeispiel-1">Neue <em>Features</em> im Vergl. zum Übungsbeispiel 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mehrere-lastfalle">Mehrere Lastfälle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verformung-als-belastung">Verformung als Belastung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materialmodelle">Materialmodelle</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berechnung-ergebnis-und-auswertung">Berechnung, Ergebnis und Auswertung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastisch-plastische-rechnung">elastisch-plastische Rechnung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperelastische-rechnung">hyperelastische Rechnung</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By U. Wuttke
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
