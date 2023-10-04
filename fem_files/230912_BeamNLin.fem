@@ -1,0 +1,75 @@
+$$
+SUBCASE       1
+  LABEL Belastung                                                                       
+$$ ========== Nonlinear Static (lin. Geom) ========
+ANALYSIS NLSTAT
+  SPC = 1001
+  LOAD = 1002
+  NLPARM = 1003
+  NLOUT = 1004
+$$ ============ Ausgabe =======
+  DISPLACEMENT = ALL
+  SPCFORCE = ALL
+  STRAIN = ALL
+  STRESS = YES
+$$
+$$
+$$ =====================================
+BEGIN BULK
+$$
+$$=============== allg. Parameter =============
+$$
+$$
+NLPARM,1003,100
+NLOUT,1004,TIME,10044
+SET,10044,TIME,LIST
++,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8
++,0.9,1.0 
+$$
+$$
+$$================ Eigenschaften ==================
+$$ 
+PBARL, 22, 33,,ROD
+,10.
+$$
+$$================= Materialien ============= MAT1 Data
+MAT1,33,100000.,,0.3,
+$$
+$$============ Lasten und Lagerung ========
+$$
+$$========= RB  ============= 
+$$ 
+SPC,1001,101,123456,0.0
+SPC,1001,201,123456,0.0
+$$
+$$
+$$==========Belastung 01=======================
+$$
+FORCE,1002,102,0,1.e+3,0.0,-1.,0.0
+FORCE,1002,206,0,1.e+3,0.0,-1.,0.0
+$$
+$$ ============ Knoten und Elemente ============
+$$  GRID/Element Data
+$$
+
+$$ Balken aus einem Element
+GRID,101,0,0.0,0.0,0.0
+GRID,102,0,1000.,0.,0.
+CBAR,1,22,101,102,0.,1.,1.,GGG
+$$
+$$ Balken aus mehreren Elementen
+GRID,201,0,0.0,250.,0.0
+GRID,202,0,200.,250.,0.0
+GRID,203,0,400.,250.,0.0
+GRID,204,0,600.,250.,0.0
+GRID,205,0,800.,250.,0.0
+GRID,206,0,1000.,250.,0.0
+$$
+CBAR,11,22,201,202,0.,1.,0.,GGG
+CBAR,12,22,202,203,0.,1.,0.,GGG
+CBAR,13,22,203,204,0.,1.,0.,GGG
+CBAR,14,22,204,205,0.,1.,0.,GGG
+CBAR,15,22,205,206,0.,1.,0.,GGG
+$$
+ENDDATA
+$$
