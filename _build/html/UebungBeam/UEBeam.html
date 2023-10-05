@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="FEM Übungsbeispiel 2: Einelementmodell" href="../UebungEinElement/UEEinElement.html" />
-    <link rel="prev" title="Übersicht" href="../Einleitung.html" />
+    <link rel="prev" title="Willkommen im Übungsskript zum Kurs NLMMD" href="../Einleitung.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -154,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../Einleitung.html">
-                    Übersicht
+                    Willkommen im Übungsskript zum Kurs NLMMD
                 </a>
             </li>
         </ul>
@@ -359,7 +359,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-der-berechnung">Start der Berechnung</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-und-ihhalt-der-fem-datei">Struktur und Ihhalt der .fem Datei</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lineare-berechnung">Lineare Berechnung</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nichtlineare-berechnung-berechnung">Nichtlineare Berechnung Berechnung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nichtlineare-berechnung">Nichtlineare Berechnung</a></li>
 </ul>
             </nav>
         </div>
@@ -378,30 +378,30 @@ document.write(`
 <p>Übungsbeispiel für das FEM-Programm (solver) OptiStruct <span id="id1">[<a class="reference internal" href="../markdown.html#id3" title="Altair Engineering Inc. Altair optistruct. Version 2021.2.1.0.1.">AltairEIncb</a>]</span></p>
 <ul class="simple">
 <li><p>zum Kennenlernen der Dateistruktur</p></li>
-<li><p>zum Einstieg in die Befehlszeilen</p></li>
-<li><p>als Beispiel von linearen und nichtlinearen Rechnungen</p></li>
+<li><p>zum Einstieg in die Befehlszeilensteuerung</p></li>
+<li><p>als Beispiel für den Unterschied linearer und nichtlinearer Rechnungen</p></li>
 </ul>
 <!---Eine gute Stichworthilfe erhält man über den [Altair OptiStruct Reference Guide](https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/ref_guide_os_c.htm)--->
 <p>Für die Bearbeitung der Textdateien empfiehlt sich ein ordentlicher Texteditor wie z.B. <a class="reference external" href="https://notepad-plus-plus.org/">notepad++</a></p>
 <p>Die im Folgenden verwendeten .fem-Dateien stehen über die <a class="reference external" href="https://campuas.frankfurt-university.de/course/view.php?id=1796">CampUas-Seite</a> zur verfügung.</p>
-<p>Das betrachtete Berechnungsbeispiel ist ein simpeler Kragträger aus einem fiktiven Material der mit einer Einzelkraft belastet ist.</p>
+<p>Das betrachtete Berechnungsbeispiel ist ein simpeler Kragträger aus einem fiktiven Material, der mit einer Einzelkraft belastet ist.</p>
 <p><img alt="Kragarm" src="../_images/Kragarm.png" /></p>
-<p>Nach der linearen Biegetheorie ergibt sich für den Kragträger eine deutlich zu große Verformung:</p>
+<p>Nach der linearen Biegetheorie ergibt sich für diesen Kragträger eine deutlich zu große Verformung:</p>
 <p><span class="math notranslate nohighlight">\(I=\pi d^4/64 = \pi\cdot 20^{4}/64 \text{mm}^{4}=7854\text{mm}^{4}\)</span></p>
 <p><span class="math notranslate nohighlight">\(w=\frac{1}{3} \frac{F\cdot l^{3}}{EI}=\frac{1}{3} \frac{F\cdot 1000^{3}}{100000\cdot 490,9} \text{mm}=424\text{mm}\)</span></p>
 </section>
 <section id="start-der-berechnung">
 <h2>Start der Berechnung<a class="headerlink" href="#start-der-berechnung" title="Permalink to this heading">#</a></h2>
-<p>Das Starten der Berehcnung kann auf zwei Arten erfolgen:</p>
+<p>Das Starten der Berechnung kann auf zwei Arten erfolgen:</p>
 <ul class="simple">
-<li><p>über die Kommandozeild der Eingabeaufforderung (command shell), z.B. zum Starten der Berechnung mit der Datei <em>230912_BeamLin.fem</em> in Windows (der Pfad ist natürlich ggf. anzupassen, (vgl. <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/run_optistruct_intro_r.htm">run OptiStruct <em>from a skript</em></a>). Die Erzeugt <em>.h3d</em>-Datei kann dann über Hyperview geöffnet werden.</p></li>
+<li><p>über die Kommandozeild der Eingabeaufforderung (command shell) (hier beispielhaft zum Start der Berechnung in Windows mit der Datei <em>230912_BeamLin.fem</em>; beim Selbstversuch ist der Pfad natürlich ggf. anzupassen; siehe auch <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/run_optistruct_intro_r.htm">run OptiStruct <em>from a skript</em></a>; die Erzeugt <em>.h3d</em>-Datei kann dann über Hyperview geöffnet werden):</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="s2">&quot;Program Files&quot;</span>\<span class="n">Altair</span>\<span class="mf">2021.2</span>\<span class="n">hwsolvers</span>\<span class="n">scripts</span>\<span class="n">optistruct</span> <span class="mi">230912</span><span class="n">_BeamLin</span><span class="o">.</span><span class="n">fem</span>
 
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>über Hyperworks und den Import via <em>Solver Deck</em> und anschließenden Start der Berechnung über <em>Analysis -&gt; OptiSttruct</em></p></li>
+<li><p>über die GUI von Hyperworks und den Import via <em>Solver Deck</em> und anschließenden Start der Berechnung über <em>Analysis -&gt; OptiSttruct</em></p></li>
 </ul>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -424,18 +424,18 @@ Altair Hyperworks 2021.2: Start der Berechnung und Anzeigen der Ergebnisse<div c
 </details></section>
 <section id="struktur-und-ihhalt-der-fem-datei">
 <h2>Struktur und Ihhalt der .fem Datei<a class="headerlink" href="#struktur-und-ihhalt-der-fem-datei" title="Permalink to this heading">#</a></h2>
-<p>Natülich lassen sich alle Berechnugnseinstellungen auch über die Menüstruktur von Hyperworks <span id="id2">[<a class="reference internal" href="../markdown.html#id4" title="Altair Engineering Inc. Altair hyperworks. Version 2021.2.">AltairEInca</a>]</span> bzw. Hypermesh eingeben. Da die Menüfühung aber wie bei jedem Programm nicht so ganz eingängig ist, im Rahmen des Kurses das Grundmodell vorgegeben ist und letztlich nur das Material angepasst werden muss, ist es (hoffentlich) einfacher, direkt in der Textdatei zu arbeiten (der grundsätzliche Aufbau der Eingabedatei ist <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/data_input_file_r.htm">hier</a> beschrieben). Die <em>$</em>-Zeichen sind er Datei sind Kommentarsymbole, d.h. diese Zeile wird nicht eingelesen und ist eine reine Kommentarzeile.</p>
-<p>Zunächst geht es um eine einfache lineare Rechnung am Beispiel der Datei <span class="xref myst">230912_BeamLin.fem</span>.</p>
+<p>Natülich lassen sich alle Berechnugnseinstellungen auch über die Menüstruktur von Hyperworks <span id="id2">[<a class="reference internal" href="../markdown.html#id4" title="Altair Engineering Inc. Altair hyperworks. Version 2021.2.">AltairEInca</a>]</span> bzw. Hypermesh eingeben. Da die Menüführung aber wie bei jedem Programm nicht so ganz eingängig ist, im Rahmen des Kurses das Grundmodell vorgegeben ist und letztlich nur das Material angepasst werden muss, ist es (hoffentlich) einfacher, direkt in der <em>.fem</em> Textdatei zu arbeiten (der grundsätzliche Aufbau der Eingabedatei ist <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/data_input_file_r.htm">hier</a> beschrieben). Die <em>$</em>-Zeichen in der Datei sind Kommentarsymbole, d.h. diese Zeile wird nicht eingelesen und für die Berechnung ohne Belang.</p>
+<p>Die Struktur der Datei wird am Beispiel der Datei <span class="xref myst">230912_BeamLin.fem</span> für eine klassiche lineare Rechnung erläutert.</p>
 <p>Der erste wichtige Block in der <em>Subcase Information</em> bzw. <em>i/O-Section</em> ist der <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/analysis_sub_r.htm"><em>ANALYSIS</em>-Eintrag</a> mit der nachfolgenden Zuordnung der Randbedingungen und Lasten:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$ ========== Static (lin. Geom) ========
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$ ===Static (lin. Geom) ===
 ANALYSIS STATCS
   SPC = 1001
   LOAD = 1002
 </pre></div>
 </div>
-<p><em>ANALYSIS STATICS</em> definiert eine eine linear statische Berechnung. Das bedeutet es können nur lineare Materialien verwendet werden und auch die Verformung wird linearisiert (entspricht der klassischen linearen Biegetheorie).
-Die Zahl hinter <em>SPC</em> (=<em>Single Point Constraint</em>) ist die ID der Lagerungsbedinung, die in der Rechnung berücksichtigt werden soll und verweist somit auf den weiter unten in der <em>Bulk Data Section</em> stehenden <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/spc_bulk_r.htm">SPC-Eintrag</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$========= RB  ============= 
+<p><em>ANALYSIS STATICS</em> definiert eine linear statische Berechnung. Das bedeutet es können nur lineare Materialien verwendet werden und auch die Verformung wird linearisiert (entspricht der klassischen linearen Biegetheorie).
+Die Zahl hinter <em>SPC</em> (=<em>Single Point Constraint</em>) ist die ID der Lagerungsbedinung, die in der Rechnung berücksichtigt werden soll und verweist auf den weiter unten in der <em>Bulk Data Section</em> stehenden <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/spc_bulk_r.htm">SPC-Eintrag</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$========= RB  ============ 
 $$ 
 SPC,1001,101,123456,0.0
 SPC,1001,201,123456,0.0
@@ -443,13 +443,13 @@ SPC,1001,201,123456,0.0
 </div>
 <p>Die Zahlenfolge <em>123456</em> beschreibt dabei die Freiheitsgrade des Knotens, die mit der Randbedingung festgehalten werden. In diesem Beispiel werden alle Verscuiebungen(<em>123</em>) und auch alle Verdrehnungen (<em>456</em>) festgehalten.</p>
 <p>Die Zahl hinter <em>LOAD</em> ist entsprechend die ID des zu berechnenden Lastfalls. Also den auch in der <em>Bulk Data Section</em> stehenden <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/force_bulk_r.htm">FORCE-EIntrag</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$==========Belastung=======================
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$===Belastung=====
 $$
 FORCE,1002,102,0,1.e+3,0.0,-1.,0.0
 FORCE,1002,206,0,1.e+3,0.0,-1.,0.0 
 </pre></div>
 </div>
-<p>Die Bedeutung der einzelnen Einträge hinter sind in im <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/ref_guide_os_c.htm"><em>Altair OptiStruct Referenc Guide</em></a> beschrieben (als Beispiel sind oben <em>SPC</em> und <em>FORCE</em> direkt verlinkt).</p>
+<p>Die Bedeutung der einzelnen Einträge hinter sind in im <a class="reference external" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/ref_guide_os_c.htm"><em>Altair OptiStruct Referenc Guide</em></a> beschrieben (als Beispiel sind oben <em>SPC</em> und <em>FORCE</em> direkt zur Hilfeseite von <em>Altair</em> verlinkt).</p>
 <p>Die Geometrie ergibt sich aus den Elementen (hier Balkenlemente vom Typ <em>CBAR</em>) die über die Knoten (<em>GRID</em>) verknüpft werden:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$ Balken aus einem Element
 GRID,101,0,0.0,0.0,0.0
@@ -462,16 +462,16 @@ GRID,202,0,200.,250.,0.0
 [...]
 </pre></div>
 </div>
-<p>Wie zu erkennen wird nicht nur ein Balken, sondern zwei erzeugt: einmal aus nur einem Element und ein weiteres mal aus mehreren Elementen. Daher waren auch die oben genannten Lasten und Lagerungsbedingunen immer dopelt angegeben. Warum hier so vorgeganen wurde wird bei der Auswertung der Berechnung erläutert. In dem oberen Eintrag werden zwei Knoten mit der ID<em>101</em> bzw. ID<em>102</em> an den Positonen (0;0;0) und (0;0;1000.) erzeugt und mit einem Balken der ein Balken verbnuden. Der Balken bekommt seine Eigenschaften über die <em>Property Definition</em> mit der ID<em>22</em>, hier über den Eintrag <em>PBARL</em> (Rundstab mit R=10):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$================ Eigenschaften ==================
+<p>Wie zu erkennen wird nicht nur ein Balken, sondern zwei erzeugt: einmal aus nur einem Element und ein weiteres mal aus mehreren Elementen. Daher waren auch die oben genannten Lasten und Lagerungsbedingunen immer dopelt angegeben. Warum hier so vorgeganen wurde, wird bei der Auswertung der Berechnung erläutert. In dem oberen Eintrag werden zwei Knoten mit der ID<em>101</em> bzw. ID<em>102</em> an den Positonen (0;0;0) und (0;0;1000.) erzeugt und mit einem Balken. Der Balken bekommt seine Eigenschaften über die <em>Property Definition</em> mit der ID<em>22</em>, hier über den Eintrag <em>PBARL</em> (Rundstab mit R=10):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$=== Eigenschaften =======
 $$ 
 PBARL, 22, 33,,ROD
 ,10.
 $$
 </pre></div>
 </div>
-<p>Das Material wird hier über die ID<em>33</em> der <em>PBARL</em>-Definition zugewiesen. Definiert wird es durch den <em>MAT1</em>-Eintrag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$================= Materialien ============= 
+<p>Das Material wird in dem Eintrag über die ID<em>33</em> der <em>PBARL</em>-Definition zugewiesen. Definiert wird es durch den <em>MAT1</em>-Eintrag mit der entsprechenden <em>ID</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$=== Materialien ========= 
 MAT1,33,100000.,,0.3,
 $$
 </pre></div>
@@ -497,13 +497,13 @@ Tipps zur Darstellung<div class="sd-summary-down docutils">
 2: Skalieren der Verformung (<em>Scale Factor</em> = 1,0) und Darstellen der undeformierten Struktur (<em>Udeformed Shape -&gt; Edges</em>)
 3: Darstellung der Verformung als Farbplot (<em>Contur</em>, <em>Result Type -&gt; Deformatoin, Mag</em>)</p>
 </div>
-</details><p>Hier ist nun auch der Grund für die “zwei Balken” zu erkennen. Beide Balken verformen sich gleich und zwar um einen Betrag von <span class="math notranslate nohighlight">\(4.42E+2-&gt;442\text{mm}\)</span> in y-Richtung (zu erkennen, wenn nur die x bzw. y-Komponente der Verformung dargestellt wird). Das entspricht (zum Glpück) der klassichen Handrechnung. Man erkenn aber, dass das Programm die Verformung zwar richtig rechnet, aber bei nur einem Element die Knoten einfach falsch linear verbindet. Erst bei mehreren Balken werden an jedem Konten auch Zwischenwerte berechnet und damit kann die Balkenverformung besser abgebildet werden.</p>
-<p>Aufgrund der linearen Rechnung (insb. der linearisierten Geometie) ist aber trotz der großen Verformung in y-Richtung die Verformung in x-Richtung gleich Null. Das kann so natürlich nicht sein, da der Balken dann ja länger werden müsste.</p>
+</details><p>In dem Bild ist nun auch der Grund für die “zwei Balken” zu erkennen. Beide Balken verformen sich am Endknoten gleich und zwar um einen Betrag von <span class="math notranslate nohighlight">\(4.42E+2-&gt;442\text{mm}\)</span> in y-Richtung (zu erkennen, wenn nur die x bzw. y-Komponente der Verformung dargestellt wird). Das entspricht (zum Glpück) der klassichen Handrechnung. Man erkenn aber, dass das Programm die Verformung zwar richtig rechnet, aber bei nur einem Element die Knoten einfach falsch linear verbindet. Erst bei mehreren Balken werden an jedem Konten auch Zwischenwerte berechnet und damit kann die Balkenverformung besser abgebildet werden.</p>
+<p>Aufgrund der linearen Rechnung (insb. der linearisierten Geometie) ist aber trotz der großen Verformung in y-Richtung die Verformung in x-Richtung gleich Null. Das kann so natürlich nicht sein, da so der Balken ja länger werden müsste.</p>
 </section>
-<section id="nichtlineare-berechnung-berechnung">
-<h2>Nichtlineare Berechnung Berechnung<a class="headerlink" href="#nichtlineare-berechnung-berechnung" title="Permalink to this heading">#</a></h2>
+<section id="nichtlineare-berechnung">
+<h2>Nichtlineare Berechnung<a class="headerlink" href="#nichtlineare-berechnung" title="Permalink to this heading">#</a></h2>
 <p>Als ersten Schritt zur Nichtlinearen Rechnung ist die Berechnugnsdatei wie folgt angepasst (<em>230912_BeamNLin.fem</em>):</p>
-<p>Im <em>ANALYSIS</em> wird die Option <em>NLSTAT</em> gewählt. Zusätzlich werden die Optionen <em>NLPARAM</em> und <em>NLOUT</em> gesetzt. Über <em>NLOUT</em> wird zudem vorgegeben dass Zwischenwerte mit ausgegeben werden (Ansonsten würde ggf. nur das letzte Ergebnis ausgespielt und damit stünden keine Informationen über den Kraft-Weg-Verlauf bei steigender Kraft zur Verfügung).</p>
+<p>Im <em>ANALYSIS</em> wird die Option <em>NLSTAT</em> gewählt. Zusätzlich werden die Optionen <em>NLPARAM</em> und <em>NLOUT</em> gesetzt. Über <em>NLOUT</em> wird zudem vorgegeben, dass Zwischenwerte mit ausgegeben werden (Ansonsten würde ggf. nur das letzte Ergebnis ausgespielt und damit stünden keine Informationen über den Kraft-Weg-Verlauf bei steigender Kraft zur Verfügung).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ANALYSIS NLSTAT
   SPC = 1001
   LOAD = 1002
@@ -526,11 +526,11 @@ SET,10044,TIME,LIST
 <p><strong>(1)</strong> wählt den Lastfaktor (Rechenzeit) aus. Wenn Hier <span class="math notranslate nohighlight">\(0,0\)</span> steht, ist der Balken noch unbelastet
 Bei <strong>(2)</strong> sollte <em>Transient Annimation Mode</em> ausgewählt sein. Dann kann man mit dem Schieberegler <strong>(3)</strong> die Last steigern.
 Über <strong>(4)</strong> lässt sich das Diagramm erzeugen.</p>
-<p>Es sit zu erkennen, dass nun zwar iterativ aber aufgrund der weiterhin linearisierten Geometrie im Grunde die Rechnung nicht verbessert wird. immernoch linear gerechnet wird. Erst durch die Ergänzung <em>LGDISP</em>,</p>
+<p>Es sit zu erkennen, dass nun zwar iterativ aber aufgrund der weiterhin linearisierten Geometrie im Grunde die Rechnung nicht besser wird. Erst durch die Ergänzung <em>LGDISP</em>,w ird nun auch die Verformung “richtig” berechnet, da nun die Geometrie nicht mehr linearisiert wird.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">NLPARM</span><span class="p">(</span><span class="n">LGDISP</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1003</span>
 </pre></div>
 </div>
-<p>wird nun auch die Verformung “richtig” berechnet. Über die Eingabedatei <em>230912_BeamNLinLaDisp.fem</em> ergibt sich das folgende Ergebnis:</p>
+<p>Über die Eingabedatei <em>230912_BeamNLinLaDisp.fem</em> ergibt sich das folgende Ergebnis:</p>
 <p><img alt="Icons" src="../_images/HyView2021Beam04.jpg" /></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -541,11 +541,11 @@ Bei <strong>(2)</strong> sollte <em>Transient Annimation Mode</em> ausgewählt s
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text"><img alt="Ergebnisdiagramm" src="../_images/ErgNLLaDisp.png" /></p>
 </div>
-</details><p>Das Folgende ist hier hervorzuheben:</p>
+</details><p>Das Folgende ist in dem Bild hervorzuheben:</p>
 <ul class="simple">
 <li><p>bis zu Belastung von <span class="math notranslate nohighlight">\(F=100\text{N}\)</span> (<em>TIME=0.1</em> entspricht dem Lastfaktor von <span class="math notranslate nohighlight">\(0,1\)</span>) ist der Verluaf der Verformung mit Zunahme der Last annähernd linear; die Verformung in x-Richtung ist näherungsweise Null,</p></li>
-<li><p>danach verformt sich die Spitze des Kragarms auch in x-Richtung (<span class="math notranslate nohighlight">\(u\)</span>).</p></li>
-<li><p>die Art der Vernetztung hat einen deutlichen Einfluss: bei dem Balken aus mehreren Elementen ist ein deutlich nichtlinearer Verlauf der Verformung in y-Richtung (<span class="math notranslate nohighlight">\(w\)</span>) zu erkennen.</p></li>
+<li><p>danach verformt sich die Spitze des Kragarms auch deutlich in x-Richtung (<span class="math notranslate nohighlight">\(u\)</span>).</p></li>
+<li><p>die Art der Vernetztung hat einen deutlichen Einfluss: bei dem Balken aus mehreren Elementen ist ein deutlich nichtlinearer Verlauf der Verformung in y-Richtung (<span class="math notranslate nohighlight">\(w\)</span>) zu erkennen; der Balken aus einem Element folgt in seiner Verformung einem Kreisbogen (hier nicht zu sehen, kann aber über den Vergleich der <span class="math notranslate nohighlight">\(x/y\)</span>-Werte mit der kreisgleichung gezeigt werden).</p></li>
 </ul>
 </section>
 </section>
@@ -587,7 +587,7 @@ Bei <strong>(2)</strong> sollte <em>Transient Annimation Mode</em> ausgewählt s
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Übersicht</p>
+        <p class="prev-next-title">Willkommen im Übungsskript zum Kurs NLMMD</p>
       </div>
     </a>
     <a class="right-next"
@@ -621,7 +621,7 @@ Bei <strong>(2)</strong> sollte <em>Transient Annimation Mode</em> ausgewählt s
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-der-berechnung">Start der Berechnung</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-und-ihhalt-der-fem-datei">Struktur und Ihhalt der .fem Datei</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lineare-berechnung">Lineare Berechnung</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nichtlineare-berechnung-berechnung">Nichtlineare Berechnung Berechnung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nichtlineare-berechnung">Nichtlineare Berechnung</a></li>
 </ul>
   </nav></div>
 

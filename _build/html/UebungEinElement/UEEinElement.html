@@ -154,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../Einleitung.html">
-                    Übersicht
+                    Willkommen im Übungsskript zum Kurs NLMMD
                 </a>
             </li>
         </ul>
@@ -386,7 +386,7 @@ document.write(`
 <ul class="simple">
 <li><p>zum Ausprobieren unterschiedlicher Materialmodelle</p></li>
 <li><p>zum Kennenlernen der Wegregelung und des Einsatzes mehrerer Rechenschritte
-Das beispiel baut auf dem <a class="reference internal" href="../UebungBeam/UEBeam.html"><span class="doc std std-doc">Übungsbeispiel 1</span></a> auf</p></li>
+Das Beispiel baut auf dem <a class="reference internal" href="../UebungBeam/UEBeam.html"><span class="doc std std-doc">Übungsbeispiel 1</span></a> auf</p></li>
 </ul>
 <p>Die im Folgenden verwendeten .fem-Dateien <em>230919_EinHexa.fem</em> stehen über die <a class="reference external" href="https://campuas.frankfurt-university.de/course/view.php?id=1796">CampUas-Seite</a> zur verfügung.</p>
 <p>Das verwendete FE-Modell ist ein Würfel mit der Kantenlänge <span class="math notranslate nohighlight">\(a=50\text{mm}\)</span>, der nur durch ein 8-Knoten-Hexaederelement vom Typ <em>CHEXA</em> abgebildet wird.</p>
@@ -396,7 +396,7 @@ Das beispiel baut auf dem <a class="reference internal" href="../UebungBeam/UEBe
 <h2>Neue <em>Features</em> im Vergl. zum Übungsbeispiel 1<a class="headerlink" href="#neue-features-im-vergl-zum-ubungsbeispiel-1" title="Permalink to this heading">#</a></h2>
 <section id="mehrere-lastfalle">
 <h3>Mehrere Lastfälle<a class="headerlink" href="#mehrere-lastfalle" title="Permalink to this heading">#</a></h3>
-<p>Über das Schlüsselwort <em>SUBCASE</em> können mehrere Lastfälle definiert werden. Durch die Angabe <em>CNTNLSUB=YES</em> rechnet der aktuelle Lastfall auf Basis der Ergebnisse des vorherigen weiter (Ansonsten startet die Rechnung “von vorne”. In diesem Beispiel wird also zuerst die Load mit der <em>ID 21</em> aufgebracht und danach (da keine neue <em>LOAD</em> definiert wird) wieder zum Ausgangszustand zurückgerechnet (also entlastet). Die <em>ID 21</em> ist hier der Last vom Typ <em>SPCD</em> zugewiesen.</p>
+<p>Über das Schlüsselwort <em>SUBCASE</em> können mehrere Lastfälle definiert werden. Durch die Angabe <em>CNTNLSUB=YES</em> rechnet der aktuelle Lastfall auf Basis der Ergebnisse des vorherigen weiter (Ansonsten startet die Rechnung “von vorne”). In diesem Beispiel wird also zuerst die Load mit der <em>ID 21</em> aufgebracht und danach (da keine neue <em>LOAD</em> definiert wird, dieser Eintrag fehlt im zweiten Block) wieder zum Ausgangszustand zurückgerechnet (also entlastet). Die <em>ID 21</em> ist hier der Last vom Typ <em>SPCD</em> zugewiesen.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SUBCASE       1
   LABEL Belastung
 $$ ========== Nonlinear Static ========
@@ -422,7 +422,7 @@ ANALYSIS NLSTAT
 </section>
 <section id="verformung-als-belastung">
 <h3>Verformung als Belastung<a class="headerlink" href="#verformung-als-belastung" title="Permalink to this heading">#</a></h3>
-<p>Bei nichtlinearem Modellverhalten, also hier bei dem nichtlinearen Materialverhalten, ist es für den Rechner einfacher Verformungslastfälle zu rechnen, als auf der Basis von Kräften zu rechnen. Dies erfolgt durch das Schlüsselwort <em>SPCD</em>, mit dem eine Knotenverformung am Knoten mit der <em>ID 99999</em> vorgegeben werden kann. Gleichzeitig sind in <em>OptiStruct</em> für diesen Knoten mindestens die Richtnugen zu Lagern, in denen die Verformung aufgebracht wird (hier werden über <em>SPC</em> alle Freiheitsgrage festgehalten).</p>
+<p>Bei nichtlinearem Modellverhalten, also hier durch das nichtlineare Materialverhalten, ist es für den Rechner einfacher Verformungslastfälle zu betrachten, als auf der Basis von Kräften zu rechnen. Dies erfolgt durch das Schlüsselwort <em>SPCD</em>, mit dem eine Knotenverformung am Knoten mit der <em>ID 99999</em> vorgegeben wird. Gleichzeitig sind in <em>OptiStruct</em> für diesen Knoten mindestens die Richtnugen zu Lagern, in denen die Verformung aufgebracht wird (hier werden über <em>SPC</em> alle Freiheitsgrage festgehalten).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$  SPC Data
 $$ Verschiebungsrandbedinung:
 SPCD,21,99999,2,30.
@@ -449,7 +449,7 @@ $$
 </section>
 <section id="berechnung-ergebnis-und-auswertung">
 <h2>Berechnung, Ergebnis und Auswertung<a class="headerlink" href="#berechnung-ergebnis-und-auswertung" title="Permalink to this heading">#</a></h2>
-<p>Für die Berechnung ist die Eingabedatei <em>230919_EinHexa.fem</em> noch ein wenig zu editieren:</p>
+<p>Für die weitere Berechnung ist die Eingabedatei <em>230919_EinHexa.fem</em> noch ein wenig zu editieren:</p>
 <section id="elastisch-plastische-rechnung">
 <h3>elastisch-plastische Rechnung<a class="headerlink" href="#elastisch-plastische-rechnung" title="Permalink to this heading">#</a></h3>
 <p>Durch die Angabe des Materials hier mit der <em>ID 331</em> bei den Voluenelementeigenschaften (<em>PSOLID</em>) wird dem Element das elastisch-plastische Material zugewiesen.</p>
@@ -457,11 +457,11 @@ $$
 <span class="n">PSOLIDX</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">1</span>
 </pre></div>
 </div>
-<p>Bei dem elastisch-plastischen Materialverhalten stehen die metallsichen Werkstoffe Pate. Die Verformung wird daher auf 10% der Probengröße eingestellt (d Umformtechnik sieht das mit Sicherheit anders), also hier $0,1\cdot 50\text{mm}=5\text{mm}.</p>
+<p>Bei dem elastisch-plastischen Materialverhalten stehen die metallsichen Werkstoffe Pate. Die Verformung wird daher auf 10% der Probengröße eingestellt (die Umformtechnik sieht das mit Sicherheit anders), also hier $0,1\cdot 50\text{mm}=5\text{mm}.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SPCD</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">99999</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">5.</span>
 </pre></div>
 </div>
-<p>Damit ergibt sich mit etwas Glück das folgende Ergebnis (Kurvendarsttellung in zwei <em>Windows</em>, zusammengesetzt aus je einer Linie pro “SUBCASE” für die Verformung (<em>Displacement</em>) und die Lagerreaktion (<em>SPCForce</em>) in y-Richtung.</p>
+<p>Damit ergibt sich mit etwas Glück das folgende Ergebnis (Kurvendarsttellung in zwei <em>Windows</em>, zusammengesetzt aus je einer Linie pro “SUBCASE” für die Verformung, <em>Displacement</em>, und die Lagerreaktion, <em>SPCForce</em>, jeweils in y-Richtung.</p>
 <p><img alt="Ergebnis el.-pl." src="../_images/HyViewEinElErgElPl.jpg" /></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -475,7 +475,7 @@ $$
 </details><p>Zur Interpretation des Kraft Verformungsverhaltens sind die folgenden Kurven zum Vergleich sinnvoll:</p>
 <ul class="simple">
 <li><p>technischer Spannugs- und Dehnungsverlauf, berechnet aus dem Kraft-Verformungs-Verlauf</p></li>
-<li><p>Spannungs-Dehungs-Verlauf als Ergebnis der Berechnung mit OptiStruct</p></li>
+<li><p>Spannungs-Dehungs-Verlauf als Ergebnis der Berechnung mit <em>OptiStruct</em></p></li>
 <li><p>wahrer Spannugns-Dehnungs-Verlauf, berechnet aus dem Kraft-Verformungs-Verlauf</p></li>
 <li><p>Spannugns-Dehnugns-Verlauf aus den vorgegebenen Werkstoffkennwerten</p></li>
 </ul>
@@ -487,7 +487,7 @@ $$
 <span class="n">PSOLIDX</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">1</span>
 </pre></div>
 </div>
-<p>Da das hyperelastische Materialverhalten für große Verzerrungen gedacht ist, ist das Beispiel für eine Dehnung von <span class="math notranslate nohighlight">\(200%\)</span> zu rechnen.</p>
+<p>Da das hyperelastische Materialverhalten für große Verzerrungen gedacht ist, ist das Beispiel z.B. für eine Dehnung von <span class="math notranslate nohighlight">\(200%\)</span> zu rechnen.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SPCD</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">99999</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">100.</span>
 </pre></div>
 </div>
@@ -509,6 +509,7 @@ $$
 <li><p>wahrer Spannugns-Dehnungs-Verlauf, berechnet aus dem Kraft-Verformungs-Verlauf</p></li>
 <li><p>Spannugns-Dehnugns-Verlauf aus den vorgegebenen Werkstoffkennwerten</p></li>
 </ul>
+<p>Viel Spaß beim Vergleichen!</p>
 </section>
 </section>
 </section>
