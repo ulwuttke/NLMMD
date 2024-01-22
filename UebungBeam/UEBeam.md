@@ -1,4 +1,4 @@
-# FEM Übungsbeispiel linear/nichtlinear
+# FEM Übungsbeispiel 1: linear/nichtlinear
 
 ## Vorabbemerkungen
 Übungsbeispiel für das FEM-Programm (solver) OptiStruct {cite}`opti2021-2`
@@ -164,7 +164,7 @@ Da nun für Mehrere Zeitschritte Ergebnisse vorliegen, muss man bei der Darstell
 Bei **(2)** sollte *Transient Annimation Mode* ausgewählt sein. Dann kann man mit dem Schieberegler **(3)** die Last steigern.
 Über **(4)** lässt sich das Diagramm erzeugen. 
 
-Es sit zu erkennen, dass nun zwar iterativ aber aufgrund der weiterhin linearisierten Geometrie im Grunde die Rechnung nicht besser wird. Erst durch die Ergänzung *LGDISP*,w ird nun auch die Verformung "richtig" berechnet, da nun die Geometrie nicht mehr linearisiert wird. 
+Es ist zu erkennen, dass nun zwar iterativ aber aufgrund der weiterhin linearisierten Geometrie im Grunde die Rechnung nicht nichtlinear wird. Erst durch die Ergänzung *LGDISP*,w ird nun auch die Verformung "richtig" berechnet, da nun die Geometrie nicht mehr linearisiert wird. 
 ```
   NLPARM(LGDISP) = 1003
 ```

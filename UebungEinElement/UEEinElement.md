@@ -43,7 +43,7 @@ ANALYSIS NLSTAT
 
 ### Verformung als Belastung
 
-Bei nichtlinearem Modellverhalten, also hier durch das nichtlineare Materialverhalten, ist es für den Rechner einfacher Verformungslastfälle zu betrachten, als auf der Basis von Kräften zu rechnen. Dies erfolgt durch das Schlüsselwort *SPCD*, mit dem eine Knotenverformung am Knoten mit der *ID 99999* vorgegeben wird. Gleichzeitig sind in *OptiStruct* für diesen Knoten mindestens die Richtnugen zu Lagern, in denen die Verformung aufgebracht wird (hier werden über *SPC* alle Freiheitsgrage festgehalten).
+Bei nichtlinearem Modellverhalten, also hier durch das nichtlineare Materialverhalten, ist es für den Rechner einfacher Verformungslastfälle zu betrachten, als auf der Basis von Kräften zu rechnen. Dies erfolgt durch das Schlüsselwort *SPCD*, mit dem eine Knotenverformung am Knoten mit der *ID 99999* vorgegeben wird. Gleichzeitig sind in *OptiStruct* für diesen Knoten mindestens die Richtnugen zu lagern, in denen die Verformung aufgebracht wird (hier werden über *SPC* alle Freiheitsgrage festgehalten).
 
 ```
 $$  SPC Data

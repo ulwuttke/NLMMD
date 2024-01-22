@@ -6,4 +6,5 @@ root: Einleitung
 chapters:
 - file: UebungBeam/UEBeam
 - file: UebungEinElement/UEEinElement
+- file: UebungDEF/UEDEF
 - file: Quellen

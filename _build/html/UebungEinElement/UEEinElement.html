@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'UebungEinElement/UEEinElement';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quellenverzeichnis" href="../Quellen.html" />
-    <link rel="prev" title="FEM Übungsbeispiel linear/nichtlinear" href="../UebungBeam/UEBeam.html" />
+    <link rel="next" title="FEM Übungsbeispiel 3 Dehnungsenergiefunktion" href="../UebungDEF/UEDEF.html" />
+    <link rel="prev" title="FEM Übungsbeispiel 1: linear/nichtlinear" href="../UebungBeam/UEBeam.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,8 +159,9 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../UebungBeam/UEBeam.html">FEM Übungsbeispiel linear/nichtlinear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UebungBeam/UEBeam.html">FEM Übungsbeispiel 1: linear/nichtlinear</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">FEM Übungsbeispiel 2: Einelementmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UebungDEF/UEDEF.html">FEM Übungsbeispiel 3 Dehnungsenergiefunktion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quellen.html">Quellenverzeichnis</a></li>
 </ul>
 
@@ -422,7 +423,7 @@ ANALYSIS NLSTAT
 </section>
 <section id="verformung-als-belastung">
 <h3>Verformung als Belastung<a class="headerlink" href="#verformung-als-belastung" title="Permalink to this heading">#</a></h3>
-<p>Bei nichtlinearem Modellverhalten, also hier durch das nichtlineare Materialverhalten, ist es für den Rechner einfacher Verformungslastfälle zu betrachten, als auf der Basis von Kräften zu rechnen. Dies erfolgt durch das Schlüsselwort <em>SPCD</em>, mit dem eine Knotenverformung am Knoten mit der <em>ID 99999</em> vorgegeben wird. Gleichzeitig sind in <em>OptiStruct</em> für diesen Knoten mindestens die Richtnugen zu Lagern, in denen die Verformung aufgebracht wird (hier werden über <em>SPC</em> alle Freiheitsgrage festgehalten).</p>
+<p>Bei nichtlinearem Modellverhalten, also hier durch das nichtlineare Materialverhalten, ist es für den Rechner einfacher Verformungslastfälle zu betrachten, als auf der Basis von Kräften zu rechnen. Dies erfolgt durch das Schlüsselwort <em>SPCD</em>, mit dem eine Knotenverformung am Knoten mit der <em>ID 99999</em> vorgegeben wird. Gleichzeitig sind in <em>OptiStruct</em> für diesen Knoten mindestens die Richtnugen zu lagern, in denen die Verformung aufgebracht wird (hier werden über <em>SPC</em> alle Freiheitsgrage festgehalten).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$  SPC Data
 $$ Verschiebungsrandbedinung:
 SPCD,21,99999,2,30.
@@ -551,15 +552,15 @@ $$
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">FEM Übungsbeispiel linear/nichtlinear</p>
+        <p class="prev-next-title">FEM Übungsbeispiel 1: linear/nichtlinear</p>
       </div>
     </a>
     <a class="right-next"
-       href="../Quellen.html"
+       href="../UebungDEF/UEDEF.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quellenverzeichnis</p>
+        <p class="prev-next-title">FEM Übungsbeispiel 3 Dehnungsenergiefunktion</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
