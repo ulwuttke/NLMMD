@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>FEM Übungsbeispiel linear/nichtlinear &#8212; NLMMD Übungen</title>
+    <title>FEM Übungsbeispiel 1: linear/nichtlinear &#8212; NLMMD Übungen</title>
   
   
   
@@ -159,8 +159,9 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">FEM Übungsbeispiel linear/nichtlinear</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">FEM Übungsbeispiel 1: linear/nichtlinear</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../UebungEinElement/UEEinElement.html">FEM Übungsbeispiel 2: Einelementmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UebungDEF/UEDEF.html">FEM Übungsbeispiel 3 Dehnungsenergiefunktion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quellen.html">Quellenverzeichnis</a></li>
 </ul>
 
@@ -345,7 +346,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>FEM Übungsbeispiel linear/nichtlinear</h1>
+    <h1>FEM Übungsbeispiel 1: linear/nichtlinear</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -371,8 +372,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fem-ubungsbeispiel-linear-nichtlinear">
-<h1>FEM Übungsbeispiel linear/nichtlinear<a class="headerlink" href="#fem-ubungsbeispiel-linear-nichtlinear" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="fem-ubungsbeispiel-1-linear-nichtlinear">
+<h1>FEM Übungsbeispiel 1: linear/nichtlinear<a class="headerlink" href="#fem-ubungsbeispiel-1-linear-nichtlinear" title="Permalink to this heading">#</a></h1>
 <section id="vorabbemerkungen">
 <h2>Vorabbemerkungen<a class="headerlink" href="#vorabbemerkungen" title="Permalink to this heading">#</a></h2>
 <p>Übungsbeispiel für das FEM-Programm (solver) OptiStruct <span id="id1">[<a class="reference internal" href="../markdown.html#id3" title="Altair Engineering Inc. Altair optistruct. Version 2021.2.1.0.1.">AltairEIncb</a>]</span></p>
@@ -526,7 +527,7 @@ SET,10044,TIME,LIST
 <p><strong>(1)</strong> wählt den Lastfaktor (Rechenzeit) aus. Wenn Hier <span class="math notranslate nohighlight">\(0,0\)</span> steht, ist der Balken noch unbelastet
 Bei <strong>(2)</strong> sollte <em>Transient Annimation Mode</em> ausgewählt sein. Dann kann man mit dem Schieberegler <strong>(3)</strong> die Last steigern.
 Über <strong>(4)</strong> lässt sich das Diagramm erzeugen.</p>
-<p>Es sit zu erkennen, dass nun zwar iterativ aber aufgrund der weiterhin linearisierten Geometrie im Grunde die Rechnung nicht besser wird. Erst durch die Ergänzung <em>LGDISP</em>,w ird nun auch die Verformung “richtig” berechnet, da nun die Geometrie nicht mehr linearisiert wird.</p>
+<p>Es ist zu erkennen, dass nun zwar iterativ aber aufgrund der weiterhin linearisierten Geometrie im Grunde die Rechnung nicht nichtlinear wird. Erst durch die Ergänzung <em>LGDISP</em>,w ird nun auch die Verformung “richtig” berechnet, da nun die Geometrie nicht mehr linearisiert wird.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">NLPARM</span><span class="p">(</span><span class="n">LGDISP</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1003</span>
 </pre></div>
 </div>
