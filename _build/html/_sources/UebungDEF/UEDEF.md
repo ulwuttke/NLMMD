@@ -31,15 +31,15 @@ J^{\frac{1}{3}}&0&0\\
 \end{bmatrix}$
 $\text{, mit } J=det(\boldsymbol{F}^{HS})=\lambda_1 \lambda_2 \lambda_3$
 
-$\boldsymbol{F}^{iso HS}=J^{-frac{1}{3}}\cdot F_{ik}=\begin{bmatrix}
+$\boldsymbol{F}^{iso HS}=J^{-\frac{1}{3}}\cdot F_{ik}=\begin{bmatrix}
 \lambda_1/J^{\frac{1}{3}}&0&0\\
 0&\lambda_2/J^{\frac{1}{3}}&0\\
 0&0&\lambda_3/J^{\frac{1}{3}}\\
 \end{bmatrix} $
 $= \begin{bmatrix}
 \bar{\lambda}_1&0&0\\
-0&\bar{\lambda}_1&0\\
-0&0&\bar{\lambda}_1\\
+0&\bar{\lambda}_2&0\\
+0&0&\bar{\lambda}_3\\
 \end{bmatrix}$
 $\text{, mit } \bar{\lambda}_i=\frac{\lambda_i}{J^{\frac{1}{3}}}= \frac{\lambda_i}{(\lambda_1 \lambda_2 \lambda_3)^{\frac{1}{3}}}$
 
@@ -89,19 +89,19 @@ $\frac{\partial w^{iso}}{\partial \bar{\lambda_{1}}}=\mu \bar{\lambda_1}^{\alpha
 
 $\frac{\partial \bar{\lambda_{1}}}{\partial \lambda_{1}}=
 \frac{\partial}{\partial \lambda_{1}} \left[\frac{\lambda_1}{(\lambda_1 \lambda_2 \lambda_3)^{\frac{1}{3}}}\right]=
-\frac{2}{3}\lambda_1^{-1/3}\lambda_2^{-1/3}\lambda_2^{-1/3}=
+\frac{2}{3}\lambda_1^{-1/3}\lambda_2^{-1/3}\lambda_3^{-1/3}=
 \frac{2}{3}J^{-1/3}=
 \frac{2}{3}\frac{\bar{\lambda_{1}}}{\lambda_{1}}$
 
 $\frac{\partial \bar{\lambda_{2}}}{\partial \lambda_{1}}=
 \frac{\partial}{\partial \lambda_{1}} \left[\frac{\lambda_2}{(\lambda_1 \lambda_2 \lambda_3)^{\frac{1}{3}}}\right]=
--\frac{1}{3}\lambda_1^{-4/3}\lambda_2^{2/3}\lambda_2^{-1/3}=
+-\frac{1}{3}\lambda_1^{-4/3}\lambda_2^{2/3}\lambda_3^{-1/3}=
 -\frac{1}{3}\frac{\lambda_{2}}{\lambda_{1}}J^{-1/3}=
 -\frac{1}{3}\frac{\bar{\lambda_{2}}}{\lambda_{1}}$
 
 $\frac{\partial \bar{\lambda_{3}}}{\partial \lambda_{1}}=
 \frac{\partial}{\partial \lambda_{1}} \left[\frac{\lambda_3}{(\lambda_1 \lambda_2 \lambda_3)^{\frac{1}{3}}}\right]=
--\frac{1}{3}\lambda_1^{-4/3}\lambda_2^{-1/3}\lambda_2^{2/3}=
+-\frac{1}{3}\lambda_1^{-4/3}\lambda_2^{-1/3}\lambda_3^{2/3}=
 -\frac{1}{3}\frac{\lambda_{3}}{\lambda_{1}}J^{-1/3}=
 -\frac{1}{3}\frac{\bar{\lambda_{3}}}{\lambda_{1}}$
 

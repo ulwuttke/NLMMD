@@ -28,8 +28,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="1.9099422"
-     inkscape:cx="370.69184"
-     inkscape:cy="657.61151"
+     inkscape:cx="345.03662"
+     inkscape:cy="657.61152"
      inkscape:window-width="1827"
      inkscape:window-height="1051"
      inkscape:window-x="84"
@@ -1363,24 +1363,24 @@
        r="8.4502993" />
     <text
        xml:space="preserve"
-       style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       style="font-size:7.05556px;line-height:0;font-family:sans-serif;stroke-width:0.264583"
        x="113.04006"
        y="178.98012"
        id="text6449"><tspan
          sodipodi:role="line"
          id="tspan6447"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.15;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
          x="113.04006"
          y="178.98012"><tspan
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
-   id="tspan6451">s</tspan><tspan
+   id="tspan728">S</tspan><tspan
    style="font-size:65%;baseline-shift:sub"
-   id="tspan6453">ik</tspan>=d<tspan
-   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+   id="tspan726">ik</tspan>=d<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.15;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
    id="tspan6457">W</tspan>/d<tspan
-   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.15;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
    id="tspan6459">C</tspan><tspan
-   style="font-size:65%;baseline-shift:sub"
+   style="font-size:65%;line-height:0.15;baseline-shift:sub"
    id="tspan6455">ik</tspan></tspan></text>
   </g>
 </svg>
