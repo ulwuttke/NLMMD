@@ -5,6 +5,7 @@ format: jb-book
 root: Einleitung
 chapters:
 - file: UebungBeam/UEBeam
+- file: UebungDefGrad/UEDefGrad
 - file: UebungEinElement/UEEinElement
 - file: UebungDEF/UEDEF
 - file: Quellen
