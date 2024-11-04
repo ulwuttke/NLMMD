@@ -1,4 +1,4 @@
-# Übungsbeispiel 3 Dehnungsenergiefunktion
+# Übungsbeispiel: Dehnungsenergiefunktion
 
 ## Vorabbemerkungen
 Beispiel für die Her leitung der Beziehung zwischen den (Haupt-)Spannungen und den (Haupt-)Streckungen auf Basis der Dehnungsenergiefunktion
@@ -63,7 +63,7 @@ $P_{\tilde{i}}=J\frac{1}{\lambda_{\tilde{i}}}\cdot \sigma_{\tilde{i}}$
 ## Beispiel
 
 ### Dehnungsenergiefunktion
-Gegeben ist die Dehnungsenergiefunktion $w$, gegeben in getrennten Anteilen für den isochoren und volumetrischen Anteil
+Gegeben ist die Dehnungsenergiefunktion auf Basis der Formuleirung nach Ogden $w$, gegeben in getrennten Anteilen für den isochoren und volumetrischen Anteil
 
 $w=w^{iso}+w^{vol}$
 

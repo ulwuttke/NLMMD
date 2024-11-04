@@ -1,4 +1,4 @@
-# FEM Übungsbeispiel 2: Einelementmodell
+# FEM Übungsbeispiel: Einelementmodell
 
 ## Vorabbemerkungen
 Übungsbeispiel für das FEM-Programm (solver) OptiStruct {cite}`opti2021-2`
