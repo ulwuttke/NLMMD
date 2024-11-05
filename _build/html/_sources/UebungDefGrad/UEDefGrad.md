@@ -9,7 +9,7 @@ $\boldsymbol{x}=x_i=\begin{bmatrix}
 x_1\\
 x_2\\
 \end{bmatrix} $ mit  
-${x}_1=(a\cdot t+1)X_1+b\cdot t X_2$
+${x}_1=(a\cdot t+1)X_1+b\cdot t X_2$  
 ${x}_2=c\cdot t X_1+(d\cdot t+1) X_2$  
 wobei sich über die Zeit $t$ die Verformung ensprechend skaliert. 
 
@@ -35,7 +35,7 @@ $\boldsymbol{x}=x_i=\begin{bmatrix}
 x_1\\
 x_2\\
 \end{bmatrix} $ mit  
-${x}_1=cos(t) X_1+ sin(t) X_2$
+${x}_1=cos(t) X_1+ sin(t) X_2$  
 ${x}_2=-sin(t) X_1+cos(t) X_2$  
 wobei sich über die Zeit $t$ die Verformung ensprechend skaliert. 
 
