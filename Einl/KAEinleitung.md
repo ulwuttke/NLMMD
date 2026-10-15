@@ -1,6 +1,6 @@
 # Einleitung
 
-## Ein paar Worte Vorab
+## Ein paar Worte vorab
 Im allgemeinen ist das Verhalten von Strukturen nichtlinear. in der Kontinuumsmechanik lassen sich
 - nichtlineare Randbedinugungen
 - nichtlineare Verformungen (im Allgemeinen gegeben, wenn große Verformungen betrachtet werden)
