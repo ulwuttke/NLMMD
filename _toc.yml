@@ -3,9 +3,17 @@
 
 format: jb-book
 root: Einleitung
-chapters:
-- file: UebungBeam/UEBeam
-- file: UebungDefGrad/UEDefGrad
-- file: UebungEinElement/UEEinElement
-- file: UebungDEF/UEDEF
-- file: Quellen
+
+parts:
+  - caption: Vorlesung
+    chapters:
+      - file: Einl/KAEinleitung
+      - file: WdH/KAWiederh
+
+  - caption: Uebung
+    chapters:
+      - file: UebungBeam/UEBeam
+      - file: UebungDefGrad/UEDefGrad
+      - file: UebungEinElement/UEEinElement
+      - file: UebungDEF/UEDEF
+      - file: Quellen
