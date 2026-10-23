@@ -3,9 +3,12 @@
 ## Mohrscher Spannungskreis
 Darstellung zur Veranschaulichung des Spannungszustandes. 
 
-- [WIKIEDIA](https://de.wikipedia.org/wiki/Mohrscher_Spannungskreis)
+- [WIKIPEDIA](https://de.wikipedia.org/wiki/Mohrscher_Spannungskreis)
 - [LMMD-Skript](https://ulwuttke.github.io/LMMD/02_rep/02_rep.html#generalized-hooke-s-law)
 
+```{dropdown} ... oder zur Erinnerung aus dem Kurs WuBV an der FRA UAS
+![MohrKreis](WuBV_MohrSpK.jpg)
+```
 
 ## Spannungstensor
 Tensor, der die Spannungsgrößen zusammenfasst um den Spannungszustand eindeutig zu charakterisieren:
@@ -13,12 +16,20 @@ Tensor, der die Spannungsgrößen zusammenfasst um den Spannungszustand eindeuti
 - [WIKIPEDIA](https://de.wikipedia.org/wiki/Spannungstensor)
 - [LMMD-Skript](https://ulwuttke.github.io/LMMD/04_spten/04_spten.html)
 
+```{dropdown} ... oder zur Erinnerung aus dem Kurs WuBV an der FRA UAS
+![SpTensor](WuBV_SpTensor.jpg)
+```
+
 ## Linear elastisches Material
 
-Klassusche lineare Beschreibung (i.A. induktiv hergeleitet, vom Besonderen zum Allgemeinen):
+Klassische lineare Beschreibung (i.A. induktiv hergeleitet, vom Besonderen zum Allgemeinen):
 
-- [WIKIPEDIA](https://de.wikipedia.org/wiki/Spannungstensor)
+- [WIKIPEDIA](https://de.wikipedia.org/wiki/Hookesches_Gesetz#Isotrope_Medien)
 - [LMMD-Skript](https://ulwuttke.github.io/LMMD/02_rep/02_rep.html#generalized-hooke-s-law)
+
+```{dropdown} ... oder zur Erinnerung aus dem Kurs WuBV an der FRA UAS
+![AllHooke](WuBV_AllgHooke.jpg)
+```
 
 ## Tensordarstellung/Tensorstufe/Indexschreibweise
 
