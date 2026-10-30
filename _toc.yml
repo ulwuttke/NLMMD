@@ -9,6 +9,7 @@ parts:
     chapters:
       - file: Einl/KAEinleitung
       - file: WdH/KAWiederh
+      - file: Kinematik/Kine
 
   - caption: Uebung
     chapters:
